@@ -23,8 +23,8 @@ class JoinLinesLightCommand(sublime_plugin.TextCommand):
             lastline = vw.line(linergns[-1].end() + 1)
             linergns.append(lastline)
             strings = map(vw.substr, linergns)
-            firstlinestr = next(strings)
-            stripped = (strg.lstrip()  for strg in strings)
+            firstlinestr = next(strings).rstrip(" \t")
+            stripped = (strg.strip(" \t")  for strg in strings)
 
             joined = ftools.reduce(addstr, stripped, firstlinestr)
             exrgn = linergns[0].cover(linergns[-1])
